@@ -14,16 +14,17 @@
             android:id="@+id/imagesList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"></android.support.v7.widget.RecyclerView>
+            android:scrollbars="vertical">
+
+        </android.support.v7.widget.RecyclerView>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_button_create_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:backgroundTint="@color/colorPrimary"
             android:src="@drawable/ic_camera_black_24dp"
+            app:backgroundTint="@color/colorPrimary"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

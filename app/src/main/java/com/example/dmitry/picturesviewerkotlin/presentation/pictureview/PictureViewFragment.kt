@@ -15,8 +15,12 @@ import java.io.File
 class PictureViewFragment : Fragment(), IPictureView.View {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        PictureViewPresenter(this, activity?.intent!!)
         return inflater.inflate(R.layout.fragment_picture_view, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        PictureViewPresenter(this, activity?.intent!!)
     }
 
     override fun showPicture(path: String) {

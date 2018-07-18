@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">kPictures Viewer</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sortBySizeBigger">Sorted by size: Bigger</string>
+    <string name="sortBySizeSmaller">Sorted by size: Smaller</string>
+    <string name="sortByDateNewer">Sorted by date: Newer</string>
+    <string name="sortByDateOlder">Sort by date: Older</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_title">Important message!</string>
+    <string name="dialog_message">Do you want delete this photo?</string>
 </resources>

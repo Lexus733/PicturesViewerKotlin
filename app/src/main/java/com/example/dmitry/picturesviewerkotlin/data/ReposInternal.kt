@@ -8,7 +8,6 @@ import com.example.dmitry.picturesviewerkotlin.domain.Image
 import java.io.File
 import java.util.*
 
-@Suppress("NAME_SHADOWING")
 class ReposInternal : IReposInternal {
     override fun createPhoto(): Intent {
         val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -23,7 +22,7 @@ class ReposInternal : IReposInternal {
         file.delete()
     }
 
-    override fun getData(): List<Image> {
+    override fun getData(): ArrayList<Image> {
         val images = ArrayList<Image>()
         val files = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
                 .toString())

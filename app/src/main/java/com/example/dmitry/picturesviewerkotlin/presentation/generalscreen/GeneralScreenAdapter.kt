@@ -21,17 +21,8 @@ class GeneralScreenAdapter(private var images: List<Image>, private var listener
         fun onItemClick(item: Image)
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = view.findViewById(R.id.picture_item_image)
-
-        fun bind(image: Image, listener: OnItemClickListener, longListener: OnItemLongClickListener) {
-            imageView.setOnClickListener { listener.onItemClick(image) }
-            imageView.setOnLongClickListener { longListener.onItemLongClick(image) }
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.fragment_picture_view, parent, false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.picture_item, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -48,5 +39,14 @@ class GeneralScreenAdapter(private var images: List<Image>, private var listener
                 .error(R.drawable.ic_error_outline_black_24dp)
                 .into(holder.imageView)
         holder.bind(image, listener, listenerLong)
+    }
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val imageView: ImageView = view.findViewById(R.id.picture_item_image)
+
+        fun bind(image: Image, listener: OnItemClickListener, longListener: OnItemLongClickListener) {
+            imageView.setOnClickListener { listener.onItemClick(image) }
+            imageView.setOnLongClickListener { longListener.onItemLongClick(image) }
+        }
     }
 }
