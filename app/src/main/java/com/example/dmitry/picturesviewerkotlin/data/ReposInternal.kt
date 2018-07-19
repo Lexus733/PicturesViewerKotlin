@@ -8,6 +8,7 @@ import com.example.dmitry.picturesviewerkotlin.domain.Image
 import java.io.File
 import java.util.*
 
+@Suppress("NAME_SHADOWING")
 class ReposInternal : IReposInternal {
     override fun createPhoto(): Intent {
         val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)

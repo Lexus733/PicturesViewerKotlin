@@ -1,14 +1,20 @@
 package com.example.dmitry.picturesviewerkotlin.presentation.generalscreen
 
+import android.os.Bundle
 import android.view.View
 import com.example.dmitry.picturesviewerkotlin.R
 import com.example.dmitry.picturesviewerkotlin.data.ReposInternal
 import com.example.dmitry.picturesviewerkotlin.domain.Image
+import com.example.dmitry.picturesviewerkotlin.other.IntentKeys
+import com.example.dmitry.picturesviewerkotlin.presentation.pictureview.PictureViewFragment
 import java.util.*
 import java.util.Collections.sort
 
 
 class GeneralScreenPresenter(var view: IGeneralScreen.View) {
+    private var picture = PictureViewFragment()
+    private var bundle = Bundle()
+
     private var repos: ReposInternal = ReposInternal()
     private var images = ArrayList<Image>()
 
@@ -86,7 +92,6 @@ class GeneralScreenPresenter(var view: IGeneralScreen.View) {
         }
     }
 
-
     private fun getLongListener(): GeneralScreenAdapter.OnItemLongClickListener {
         return object : GeneralScreenAdapter.OnItemLongClickListener {
             override fun onItemLongClick(item: Image): Boolean {
@@ -99,8 +104,9 @@ class GeneralScreenPresenter(var view: IGeneralScreen.View) {
     private fun getOnItemListener(): GeneralScreenAdapter.OnItemClickListener {
         return object : GeneralScreenAdapter.OnItemClickListener {
             override fun onItemClick(item: Image) {
-                //listener to another fragment
-                //need add menu
+                bundle.putString(IntentKeys.PATH_TO_PHOTO, item.path)
+                picture.arguments = bundle
+                view.goToFragment(picture)
             }
         }
     }

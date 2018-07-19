@@ -12,7 +12,6 @@ import java.io.File
 
 
 class GeneralScreenAdapter(private var images: List<Image>, private var listener: OnItemClickListener, private var listenerLong: OnItemLongClickListener) : RecyclerView.Adapter<GeneralScreenAdapter.ViewHolder>() {
-
     interface OnItemLongClickListener {
         fun onItemLongClick(item: Image): Boolean
     }

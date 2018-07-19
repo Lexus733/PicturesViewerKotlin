@@ -5,12 +5,11 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import com.example.dmitry.picturesviewerkotlin.R
 import com.example.dmitry.picturesviewerkotlin.domain.Image
+import com.example.dmitry.picturesviewerkotlin.presentation.pictureview.PictureViewFragment
 import kotlinx.android.synthetic.main.fragment_general_screen.*
 
 
@@ -19,14 +18,37 @@ class GeneralScreenFragment : Fragment(), IGeneralScreen.View {
 
     private var deleteDialog: AlertDialog? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_general_screen, container, false)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.general_screen_menu_items, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item != null) {
+            when (item.itemId) {
+                R.id.sortedByDate -> {
+                    generalScreenPresenter.menuSortByDate()
+                }
+                R.id.sortedBySize -> {
+                    generalScreenPresenter.menuSortBySize()
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        imagesList.layoutManager = GridLayoutManager(context,3)
+        imagesList.layoutManager = GridLayoutManager(context, 3)
         generalScreenPresenter = GeneralScreenPresenter(this)
         imagesList.adapter = generalScreenPresenter.getAdapter()
         generalScreenPresenter.setPhotoListener()
@@ -46,6 +68,7 @@ class GeneralScreenFragment : Fragment(), IGeneralScreen.View {
             deleteDialog!!.dismiss()
             deleteDialog = null
             deleteDialog = createDeleteDialog(image)
+            deleteDialog!!.show()
         } else {
             deleteDialog = createDeleteDialog(image)
             deleteDialog!!.show()
@@ -60,5 +83,9 @@ class GeneralScreenFragment : Fragment(), IGeneralScreen.View {
                 .setPositiveButton(R.string.dialog_yes) { _, _ -> generalScreenPresenter.deleteItem(item) }
                 .setNegativeButton(R.string.dialog_cancel) { arg0, _ -> arg0.dismiss() }
         return alertDialogBuilder.create()
+    }
+
+    override fun goToFragment(pictureViewFragment: PictureViewFragment) {
+        fragmentManager!!.beginTransaction().replace(R.id.frameLayout, pictureViewFragment).addToBackStack(null).commit()
     }
 }

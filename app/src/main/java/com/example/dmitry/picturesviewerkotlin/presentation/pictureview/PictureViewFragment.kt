@@ -20,7 +20,8 @@ class PictureViewFragment : Fragment(), IPictureView.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        PictureViewPresenter(this, activity?.intent!!)
+        val bundle: Bundle = this!!.arguments!!
+        PictureViewPresenter(this, bundle)
     }
 
     override fun showPicture(path: String) {
@@ -30,5 +31,4 @@ class PictureViewFragment : Fragment(), IPictureView.View {
                 .placeholder(R.drawable.ic_file_download_black_24dp)
                 .into(pictureView_picture_image_view)
     }
-
 }

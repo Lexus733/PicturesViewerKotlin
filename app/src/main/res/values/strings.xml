@@ -8,4 +8,6 @@
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_title">Important message!</string>
     <string name="dialog_message">Do you want delete this photo?</string>
+    <string name="sort_by_size">Sort by size</string>
+    <string name="sort_by_date">Sort by date</string>
 </resources>
