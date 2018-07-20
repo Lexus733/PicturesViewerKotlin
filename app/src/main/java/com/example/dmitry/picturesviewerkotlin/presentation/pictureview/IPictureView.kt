@@ -1,7 +1,8 @@
 package com.example.dmitry.picturesviewerkotlin.presentation.pictureview
 
-interface IPictureView {
-    interface View {
-        fun showPicture(path: String)
-    }
+import com.arellomobile.mvp.MvpView
+
+
+interface IPictureView : MvpView {
+    fun showPicture(path: String)
 }

@@ -3,18 +3,21 @@ package com.example.dmitry.picturesviewerkotlin.presentation.generalscreen
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.view.*
 import android.widget.Toast
+import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.dmitry.picturesviewerkotlin.R
 import com.example.dmitry.picturesviewerkotlin.domain.Image
+import com.example.dmitry.picturesviewerkotlin.other.IntentKeys
 import com.example.dmitry.picturesviewerkotlin.presentation.pictureview.PictureViewFragment
 import kotlinx.android.synthetic.main.fragment_general_screen.*
 
 
-class GeneralScreenFragment : Fragment(), IGeneralScreen.View {
-    private lateinit var generalScreenPresenter: GeneralScreenPresenter
+class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
+    @InjectPresenter
+    lateinit var generalScreenPresenter: GeneralScreenPresenter
 
     private var deleteDialog: AlertDialog? = null
 
@@ -49,7 +52,6 @@ class GeneralScreenFragment : Fragment(), IGeneralScreen.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         imagesList.layoutManager = GridLayoutManager(context, 3)
-        generalScreenPresenter = GeneralScreenPresenter(this)
         imagesList.adapter = generalScreenPresenter.getAdapter()
         generalScreenPresenter.setPhotoListener()
 
@@ -86,6 +88,6 @@ class GeneralScreenFragment : Fragment(), IGeneralScreen.View {
     }
 
     override fun goToFragment(pictureViewFragment: PictureViewFragment) {
-        fragmentManager!!.beginTransaction().replace(R.id.frameLayout, pictureViewFragment).addToBackStack(null).commit()
+        fragmentManager!!.beginTransaction().replace(R.id.frameLayout, pictureViewFragment).addToBackStack(IntentKeys.PATH_TO_PHOTO).commit()
     }
 }

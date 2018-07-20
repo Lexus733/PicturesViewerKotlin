@@ -2,17 +2,30 @@ package com.example.dmitry.picturesviewerkotlin.presentation.pictureview
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.dmitry.picturesviewerkotlin.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_picture_view.*
 import java.io.File
 
 
-class PictureViewFragment : Fragment(), IPictureView.View {
+class PictureViewFragment : MvpAppCompatFragment(), IPictureView {
+    @InjectPresenter
+    lateinit var presenter: PictureViewPresenter
+
+    @ProvidePresenter
+    fun providedPictureViewPresenter(): PictureViewPresenter {
+        return PictureViewPresenter(this.arguments!!)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_picture_view, container, false)
@@ -20,8 +33,6 @@ class PictureViewFragment : Fragment(), IPictureView.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bundle: Bundle = this!!.arguments!!
-        PictureViewPresenter(this, bundle)
     }
 
     override fun showPicture(path: String) {

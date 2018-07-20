@@ -2,6 +2,8 @@ package com.example.dmitry.picturesviewerkotlin.presentation.generalscreen
 
 import android.os.Bundle
 import android.view.View
+import com.arellomobile.mvp.InjectViewState
+import com.arellomobile.mvp.MvpPresenter
 import com.example.dmitry.picturesviewerkotlin.R
 import com.example.dmitry.picturesviewerkotlin.data.ReposInternal
 import com.example.dmitry.picturesviewerkotlin.domain.Image
@@ -10,8 +12,8 @@ import com.example.dmitry.picturesviewerkotlin.presentation.pictureview.PictureV
 import java.util.*
 import java.util.Collections.sort
 
-
-class GeneralScreenPresenter(var view: IGeneralScreen.View) {
+@InjectViewState
+class GeneralScreenPresenter: MvpPresenter<IGeneralScreen>() {
     private var picture = PictureViewFragment()
     private var bundle = Bundle()
 
@@ -30,7 +32,7 @@ class GeneralScreenPresenter(var view: IGeneralScreen.View) {
 
     fun menuSortBySize() {
         if (sortBySize) {
-            view.showMessage(R.string.sortBySizeBigger)
+            viewState.showMessage(R.string.sortBySizeBigger)
 
             sort(images) { o1, o2 ->
                 if (o1.size > o2.size) {
@@ -44,7 +46,7 @@ class GeneralScreenPresenter(var view: IGeneralScreen.View) {
             sortBySize = !sortBySize
             adapter.notifyDataSetChanged()
         } else {
-            view.showMessage(R.string.sortBySizeSmaller)
+            viewState.showMessage(R.string.sortBySizeSmaller)
 
             sort(images) { o1, o2 ->
                 if (o1.size > o2.size) {
@@ -62,7 +64,7 @@ class GeneralScreenPresenter(var view: IGeneralScreen.View) {
 
     fun menuSortByDate() {
         if (sortByDate) {
-            view.showMessage(R.string.sortByDateNewer)
+            viewState.showMessage(R.string.sortByDateNewer)
 
             sort(images) { o1, o2 ->
                 if (o1.date.time > o2.date.time) {
@@ -76,7 +78,7 @@ class GeneralScreenPresenter(var view: IGeneralScreen.View) {
             sortByDate = !sortByDate
             adapter.notifyDataSetChanged()
         } else {
-            view.showMessage(R.string.sortByDateOlder)
+            viewState.showMessage(R.string.sortByDateOlder)
 
             sort(images) { o1, o2 ->
                 if (o1.date.time > o2.date.time) {
@@ -95,7 +97,7 @@ class GeneralScreenPresenter(var view: IGeneralScreen.View) {
     private fun getLongListener(): GeneralScreenAdapter.OnItemLongClickListener {
         return object : GeneralScreenAdapter.OnItemLongClickListener {
             override fun onItemLongClick(item: Image): Boolean {
-                view.showDialog(item)
+                viewState.showDialog(item)
                 return true
             }
         }
@@ -106,7 +108,7 @@ class GeneralScreenPresenter(var view: IGeneralScreen.View) {
             override fun onItemClick(item: Image) {
                 bundle.putString(IntentKeys.PATH_TO_PHOTO, item.path)
                 picture.arguments = bundle
-                view.goToFragment(picture)
+                viewState.goToFragment(picture)
             }
         }
     }
@@ -116,7 +118,7 @@ class GeneralScreenPresenter(var view: IGeneralScreen.View) {
     }
 
     fun setPhotoListener() {
-        view.setOnClickCreatePhoto(createPhotoListener())
+        viewState.setOnClickCreatePhoto(createPhotoListener())
     }
 
     fun deleteItem(item: Image) {
@@ -128,5 +130,4 @@ class GeneralScreenPresenter(var view: IGeneralScreen.View) {
     fun getAdapter(): GeneralScreenAdapter {
         return adapter
     }
-
 }
