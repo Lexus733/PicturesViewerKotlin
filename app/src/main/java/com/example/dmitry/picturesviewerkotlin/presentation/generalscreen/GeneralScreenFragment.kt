@@ -8,10 +8,10 @@ import android.view.*
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.example.dmitry.picturesviewerkotlin.MainApplication
 import com.example.dmitry.picturesviewerkotlin.R
 import com.example.dmitry.picturesviewerkotlin.domain.Image
-import com.example.dmitry.picturesviewerkotlin.other.IntentKeys
-import com.example.dmitry.picturesviewerkotlin.presentation.pictureview.PictureViewFragment
+import com.example.dmitry.picturesviewerkotlin.other.ScreenKeys
 import kotlinx.android.synthetic.main.fragment_general_screen.*
 
 
@@ -87,7 +87,11 @@ class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
         return alertDialogBuilder.create()
     }
 
-    override fun goToFragment(pictureViewFragment: PictureViewFragment) {
-        fragmentManager!!.beginTransaction().replace(R.id.frameLayout, pictureViewFragment).addToBackStack(IntentKeys.PATH_TO_PHOTO).commit()
+    override fun goToFragment(pictureViewBundle: Bundle) {
+        MainApplication.getRouter().navigateTo(ScreenKeys.PICTURE_VIEW,pictureViewBundle)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
 }

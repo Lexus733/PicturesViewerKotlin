@@ -13,26 +13,26 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_picture_view.*
 import java.io.File
 
-
 class PictureViewFragment : MvpAppCompatFragment(), IPictureView {
+    companion object {
+        private lateinit var bundle: Bundle
+        fun newInstance(bundle: Bundle): PictureViewFragment {
+            this.bundle = bundle
+            return PictureViewFragment()
+        }
+    }
+
     @InjectPresenter
     lateinit var presenter: PictureViewPresenter
 
     @ProvidePresenter
     fun providedPictureViewPresenter(): PictureViewPresenter {
-        return PictureViewPresenter(this.arguments!!)
+        return PictureViewPresenter(bundle)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_picture_view, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun showPicture(path: String) {

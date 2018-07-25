@@ -14,7 +14,6 @@ import java.util.Collections.sort
 
 @InjectViewState
 class GeneralScreenPresenter: MvpPresenter<IGeneralScreen>() {
-    private var picture = PictureViewFragment()
     private var bundle = Bundle()
 
     private var repos: ReposInternal = ReposInternal()
@@ -107,8 +106,7 @@ class GeneralScreenPresenter: MvpPresenter<IGeneralScreen>() {
         return object : GeneralScreenAdapter.OnItemClickListener {
             override fun onItemClick(item: Image) {
                 bundle.putString(IntentKeys.PATH_TO_PHOTO, item.path)
-                picture.arguments = bundle
-                viewState.goToFragment(picture)
+                viewState.goToFragment(bundle)
             }
         }
     }
