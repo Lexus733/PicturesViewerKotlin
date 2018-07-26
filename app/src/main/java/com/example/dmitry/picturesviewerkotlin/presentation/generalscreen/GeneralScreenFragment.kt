@@ -88,10 +88,6 @@ class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
     }
 
     override fun goToFragment(pictureViewBundle: Bundle) {
-        MainApplication.getRouter().navigateTo(ScreenKeys.PICTURE_VIEW,pictureViewBundle)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
+        MainApplication.getRouter().replaceScreen(ScreenKeys.PICTURE_VIEW, pictureViewBundle)
     }
 }

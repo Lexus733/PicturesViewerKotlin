@@ -5,19 +5,20 @@ import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 
-class MainApplication: Application() {
+class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         cicerone = Cicerone.create()
     }
+
     companion object {
         private var cicerone: Cicerone<Router>? = null
 
-        fun getNavigatorHolder():NavigatorHolder{
+        fun getNavigatorHolder(): NavigatorHolder {
             return cicerone!!.navigatorHolder
         }
 
-        fun getRouter(): Router{
+        fun getRouter(): Router {
             return cicerone!!.router
         }
     }

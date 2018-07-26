@@ -8,7 +8,6 @@ import com.example.dmitry.picturesviewerkotlin.R
 import com.example.dmitry.picturesviewerkotlin.data.ReposInternal
 import com.example.dmitry.picturesviewerkotlin.domain.Image
 import com.example.dmitry.picturesviewerkotlin.other.IntentKeys
-import com.example.dmitry.picturesviewerkotlin.presentation.pictureview.PictureViewFragment
 import java.util.*
 import java.util.Collections.sort
 

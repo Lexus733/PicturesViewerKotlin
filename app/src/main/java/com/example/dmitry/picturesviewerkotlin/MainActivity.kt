@@ -25,7 +25,7 @@ class MainActivity : MvpAppCompatActivity() {
             }
 
             override fun showSystemMessage(message: String?) {
-                Toast.makeText(applicationContext,"Error!!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Error!!", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -36,7 +36,7 @@ class MainActivity : MvpAppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        MainApplication.getRouter().exit()
+        MainApplication.getRouter().replaceScreen(ScreenKeys.GENERAL_SCREEN)
     }
 
     override fun onResume() {
