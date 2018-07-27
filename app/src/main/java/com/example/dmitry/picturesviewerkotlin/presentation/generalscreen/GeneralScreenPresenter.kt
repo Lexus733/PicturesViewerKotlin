@@ -12,7 +12,7 @@ import java.util.*
 import java.util.Collections.sort
 
 @InjectViewState
-class GeneralScreenPresenter: MvpPresenter<IGeneralScreen>() {
+class GeneralScreenPresenter : MvpPresenter<IGeneralScreen>() {
     private var bundle = Bundle()
 
     private var repos: ReposInternal = ReposInternal()

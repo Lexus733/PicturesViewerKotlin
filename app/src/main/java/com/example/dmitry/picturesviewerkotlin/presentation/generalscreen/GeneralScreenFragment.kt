@@ -8,6 +8,7 @@ import android.view.*
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.PresenterType
 import com.example.dmitry.picturesviewerkotlin.MainApplication
 import com.example.dmitry.picturesviewerkotlin.R
 import com.example.dmitry.picturesviewerkotlin.domain.Image
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_general_screen.*
 
 
 class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
-    @InjectPresenter
+    @InjectPresenter(type = PresenterType.LOCAL)
     lateinit var generalScreenPresenter: GeneralScreenPresenter
 
     private var deleteDialog: AlertDialog? = null
@@ -88,6 +89,6 @@ class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
     }
 
     override fun goToFragment(pictureViewBundle: Bundle) {
-        MainApplication.getRouter().replaceScreen(ScreenKeys.PICTURE_VIEW, pictureViewBundle)
+        MainApplication.getRouter().navigateTo(ScreenKeys.PICTURE_VIEW, pictureViewBundle)
     }
 }

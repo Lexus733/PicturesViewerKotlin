@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.PresenterType
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.dmitry.picturesviewerkotlin.R
 import com.squareup.picasso.Picasso
@@ -22,10 +23,10 @@ class PictureViewFragment : MvpAppCompatFragment(), IPictureView {
         }
     }
 
-    @InjectPresenter
+    @InjectPresenter(type = PresenterType.LOCAL)
     lateinit var presenter: PictureViewPresenter
 
-    @ProvidePresenter
+    @ProvidePresenter(type = PresenterType.LOCAL)
     fun providedPictureViewPresenter(): PictureViewPresenter {
         return PictureViewPresenter(bundle)
     }

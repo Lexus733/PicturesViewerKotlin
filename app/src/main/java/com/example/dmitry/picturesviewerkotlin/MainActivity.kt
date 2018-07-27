@@ -36,7 +36,9 @@ class MainActivity : MvpAppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        MainApplication.getRouter().replaceScreen(ScreenKeys.GENERAL_SCREEN)
+        if (supportFragmentManager.backStackEntryCount > 1)
+            MainApplication.getRouter().exit()
+        else finish()
     }
 
     override fun onResume() {
