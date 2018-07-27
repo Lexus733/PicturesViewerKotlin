@@ -127,4 +127,9 @@ class GeneralScreenPresenter : MvpPresenter<IGeneralScreen>() {
     fun getAdapter(): GeneralScreenAdapter {
         return adapter
     }
+
+    fun getNewAdapter(){
+        images = repos.getData()
+        adapter = GeneralScreenAdapter(images, getOnItemListener(), getLongListener())
+    }
 }

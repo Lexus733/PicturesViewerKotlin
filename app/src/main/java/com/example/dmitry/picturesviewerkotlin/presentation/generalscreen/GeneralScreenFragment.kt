@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_general_screen.*
 
 
 class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
-    @InjectPresenter(type = PresenterType.LOCAL)
+    @InjectPresenter(type = PresenterType.GLOBAL)
     lateinit var generalScreenPresenter: GeneralScreenPresenter
 
     private var deleteDialog: AlertDialog? = null
@@ -90,5 +90,11 @@ class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
 
     override fun goToFragment(pictureViewBundle: Bundle) {
         MainApplication.getRouter().navigateTo(ScreenKeys.PICTURE_VIEW, pictureViewBundle)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        generalScreenPresenter.getNewAdapter()
+        imagesList.adapter = generalScreenPresenter.getAdapter()
     }
 }
