@@ -9,9 +9,12 @@ import com.example.dmitry.picturesviewerkotlin.R
 import com.example.dmitry.picturesviewerkotlin.domain.Image
 import com.squareup.picasso.Picasso
 import java.io.File
+import java.util.*
 
 
-class GeneralScreenAdapter(private var images: List<Image>, private var listener: OnItemClickListener, private var listenerLong: OnItemLongClickListener) : RecyclerView.Adapter<GeneralScreenAdapter.ViewHolder>() {
+class GeneralScreenAdapter(private val listener: OnItemClickListener, private val listenerLong: OnItemLongClickListener) : RecyclerView.Adapter<GeneralScreenAdapter.ViewHolder>() {
+    private lateinit var images: ArrayList<Image>
+
     interface OnItemLongClickListener {
         fun onItemLongClick(item: Image): Boolean
     }
@@ -22,6 +25,11 @@ class GeneralScreenAdapter(private var images: List<Image>, private var listener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.picture_item, parent, false))
+    }
+
+    fun setData(images: ArrayList<Image>) {
+        this.images = images
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
@@ -38,6 +46,54 @@ class GeneralScreenAdapter(private var images: List<Image>, private var listener
                 .error(R.drawable.ic_error_outline_black_24dp)
                 .into(holder.imageView)
         holder.bind(image, listener, listenerLong)
+    }
+
+    fun removeItem(item: Image) {
+        images.remove(item)
+    }
+
+    fun sortByDateNewer() {
+        images.sortWith(Comparator { o1, o2 ->
+            if (o1.date.time > o2.date.time) {
+                return@Comparator -1
+            } else if (o1.date.time < o2.date.time) {
+                return@Comparator 1
+            }
+            0
+        })
+    }
+
+    fun sortByDateOlder() {
+        images.sortWith(Comparator { o1, o2 ->
+            if (o1.date.time > o2.date.time) {
+                return@Comparator 1
+            } else if (o1.date.time < o2.date.time) {
+                return@Comparator -1
+            }
+            0
+        })
+    }
+
+    fun sortBySizeBigger() {
+        images.sortWith(Comparator { o1, o2 ->
+            if (o1.size > o2.size) {
+                return@Comparator -1
+            } else if (o1.size < o2.size) {
+                return@Comparator 1
+            }
+            0
+        })
+    }
+
+    fun sortBySizeSmaller() {
+        images.sortWith(Comparator { o1, o2 ->
+            if (o1.size > o2.size) {
+                return@Comparator 1
+            } else if (o1.size < o2.size) {
+                return@Comparator -1
+            }
+            0
+        })
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

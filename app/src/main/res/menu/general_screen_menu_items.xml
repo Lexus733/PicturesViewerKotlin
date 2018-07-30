@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/sortedBySize"
-        android:title="@string/sort_by_size"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_baseline_format_list_numbered_24px">
-    </item>
+        android:orderInCategory="2"
+        android:id="@+id/sortedBySizeSmaller"
+        android:title="@string/sort_by_size_smaller"></item>
+
     <item
-        android:id="@+id/sortedByDate"
-        android:title="@string/sort_by_date"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_baseline_date_range_24px">
-    </item>
+        android:orderInCategory="3"
+        android:id="@+id/sortedByDateNewer"
+        android:title="@string/sort_by_date_newer"></item>
+    <item
+        android:orderInCategory="1"
+        android:id="@+id/sortedBySizeBigger"
+        android:title="@string/sort_by_size_bigger"></item>
+    <item
+        android:orderInCategory="4"
+        android:id="@+id/sortedByDateOlder"
+        android:title="@string/sort_by_date_older"></item>
 </menu>

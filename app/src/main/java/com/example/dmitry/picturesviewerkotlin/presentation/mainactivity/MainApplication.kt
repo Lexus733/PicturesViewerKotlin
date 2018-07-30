@@ -1,4 +1,4 @@
-package com.example.dmitry.picturesviewerkotlin
+package com.example.dmitry.picturesviewerkotlin.presentation.mainactivity
 
 import android.app.Application
 import ru.terrakok.cicerone.Cicerone

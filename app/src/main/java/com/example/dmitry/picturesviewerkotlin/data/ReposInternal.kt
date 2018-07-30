@@ -19,8 +19,7 @@ class ReposInternal : IReposInternal {
     }
 
     override fun deleteFile(path: String) {
-        val file = File(path)
-        file.delete()
+        File(path).delete()
     }
 
     override fun getData(): ArrayList<Image> {

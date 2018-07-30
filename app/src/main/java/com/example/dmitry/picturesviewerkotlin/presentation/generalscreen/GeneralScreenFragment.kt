@@ -9,16 +9,14 @@ import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
-import com.example.dmitry.picturesviewerkotlin.MainApplication
 import com.example.dmitry.picturesviewerkotlin.R
 import com.example.dmitry.picturesviewerkotlin.domain.Image
-import com.example.dmitry.picturesviewerkotlin.other.ScreenKeys
 import kotlinx.android.synthetic.main.fragment_general_screen.*
 
 
 class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
     @InjectPresenter(type = PresenterType.GLOBAL)
-    lateinit var generalScreenPresenter: GeneralScreenPresenter
+    lateinit var presenter: GeneralScreenPresenter
 
     private var deleteDialog: AlertDialog? = null
 
@@ -32,34 +30,34 @@ class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
         return inflater.inflate(R.layout.fragment_general_screen, container, false)
     }
 
+    override fun initView(adapter: GeneralScreenAdapter, listener: View.OnClickListener) {
+        imagesList.layoutManager = GridLayoutManager(context, 3)
+        imagesList.adapter = adapter
+        fab_button_create_photo.setOnClickListener(listener)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.general_screen_menu_items, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item != null) {
-            when (item.itemId) {
-                R.id.sortedByDate -> {
-                    generalScreenPresenter.menuSortByDate()
+        item?.let {
+            when (it.itemId) {
+                R.id.sortedByDateNewer -> {
+                    presenter.onSortByDateNewer()
                 }
-                R.id.sortedBySize -> {
-                    generalScreenPresenter.menuSortBySize()
+                R.id.sortedByDateOlder -> {
+                    presenter.onSortByDateOlder()
+                }
+                R.id.sortedBySizeBigger -> {
+                    presenter.onSortBySizeBigger()
+                }
+                R.id.sortedBySizeSmaller -> {
+                    presenter.onSortBySizeSmaller()
                 }
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        imagesList.layoutManager = GridLayoutManager(context, 3)
-        imagesList.adapter = generalScreenPresenter.getAdapter()
-        generalScreenPresenter.setPhotoListener()
-
-    }
-
-    override fun setOnClickCreatePhoto(clickCreatePhoto: View.OnClickListener) {
-        fab_button_create_photo.setOnClickListener(clickCreatePhoto)
     }
 
     override fun showMessage(id: Int) {
@@ -67,15 +65,10 @@ class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
     }
 
     override fun showDialog(image: Image) {
-        if (deleteDialog != null) {
-            deleteDialog!!.dismiss()
-            deleteDialog = null
-            deleteDialog = createDeleteDialog(image)
-            deleteDialog!!.show()
-        } else {
-            deleteDialog = createDeleteDialog(image)
-            deleteDialog!!.show()
-        }
+        deleteDialog?.let { deleteDialog!!.dismiss() }
+
+        deleteDialog = createDeleteDialog(image)
+        deleteDialog!!.show()
     }
 
     private fun createDeleteDialog(item: Image): AlertDialog {
@@ -83,18 +76,13 @@ class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
         alertDialogBuilder.setTitle(R.string.dialog_title)
                 .setMessage(R.string.dialog_message)
                 .setIcon(R.drawable.ic_warning_black_24dp)
-                .setPositiveButton(R.string.dialog_yes) { _, _ -> generalScreenPresenter.deleteItem(item) }
-                .setNegativeButton(R.string.dialog_cancel) { arg0, _ -> arg0.dismiss() }
+                .setPositiveButton(R.string.dialog_yes) { _, _ -> presenter.onDeleteItem(item) }
+                .setNegativeButton(R.string.dialog_cancel) { arg0, _ -> presenter.onCancelDelete(arg0) }
         return alertDialogBuilder.create()
-    }
-
-    override fun goToFragment(pictureViewBundle: Bundle) {
-        MainApplication.getRouter().navigateTo(ScreenKeys.PICTURE_VIEW, pictureViewBundle)
     }
 
     override fun onResume() {
         super.onResume()
-        generalScreenPresenter.getNewAdapter()
-        imagesList.adapter = generalScreenPresenter.getAdapter()
+        presenter.onRefreshView()
     }
 }

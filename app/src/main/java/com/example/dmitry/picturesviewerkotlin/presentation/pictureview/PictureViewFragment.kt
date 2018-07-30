@@ -10,16 +10,17 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.dmitry.picturesviewerkotlin.R
+import com.example.dmitry.picturesviewerkotlin.other.IntentKeys
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_picture_view.*
 import java.io.File
 
 class PictureViewFragment : MvpAppCompatFragment(), IPictureView {
     companion object {
-        private lateinit var bundle: Bundle
         fun newInstance(bundle: Bundle): PictureViewFragment {
-            this.bundle = bundle
-            return PictureViewFragment()
+            val instance = PictureViewFragment()
+            instance.arguments = bundle
+            return instance
         }
     }
 
@@ -28,7 +29,7 @@ class PictureViewFragment : MvpAppCompatFragment(), IPictureView {
 
     @ProvidePresenter(type = PresenterType.LOCAL)
     fun providedPictureViewPresenter(): PictureViewPresenter {
-        return PictureViewPresenter(bundle)
+        return PictureViewPresenter(arguments!![IntentKeys.PATH_TO_PHOTO] as String)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -37,10 +38,12 @@ class PictureViewFragment : MvpAppCompatFragment(), IPictureView {
     }
 
     override fun showPicture(path: String) {
-        Picasso.get()
-                .load(File(path))
-                .error(R.drawable.ic_error_outline_black_24dp)
-                .placeholder(R.drawable.ic_file_download_black_24dp)
-                .into(pictureView_picture_image_view)
+        File(path).let {
+            Picasso.get()
+                    .load(File(path))
+                    .error(R.drawable.ic_error_outline_black_24dp)
+                    .placeholder(R.drawable.ic_file_download_black_24dp)
+                    .into(pictureView_picture_image_view)
+        }
     }
 }

@@ -1,9 +1,10 @@
-package com.example.dmitry.picturesviewerkotlin
+package com.example.dmitry.picturesviewerkotlin.presentation.mainactivity
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
+import com.example.dmitry.picturesviewerkotlin.R
 import com.example.dmitry.picturesviewerkotlin.other.ScreenKeys
 import com.example.dmitry.picturesviewerkotlin.presentation.generalscreen.GeneralScreenFragment
 import com.example.dmitry.picturesviewerkotlin.presentation.pictureview.PictureViewFragment

@@ -1,13 +1,11 @@
 <resources>
     <string name="app_name">kPictures Viewer</string>
-    <string name="sortBySizeBigger">Sorted by size: Bigger</string>
-    <string name="sortBySizeSmaller">Sorted by size: Smaller</string>
-    <string name="sortByDateNewer">Sorted by date: Newer</string>
-    <string name="sortByDateOlder">Sort by date: Older</string>
     <string name="dialog_yes">Yes</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_title">Important message!</string>
     <string name="dialog_message">Do you want delete this photo?</string>
-    <string name="sort_by_size">Sort by size</string>
-    <string name="sort_by_date">Sort by date</string>
+    <string name="sort_by_size_smaller">Sort by size smaller</string>
+    <string name="sort_by_size_bigger">Sort by size bigger</string>
+    <string name="sort_by_date_newer">Sort by date newer</string>
+    <string name="sort_by_date_older">Sort by date older</string>
 </resources>
