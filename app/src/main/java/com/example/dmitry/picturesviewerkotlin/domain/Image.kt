@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import java.io.File
 import java.util.*
 
-data class Image(var path: String?) {
+data class Image(val path: String?) {
     var image: Bitmap? = null
 
     val size: Float

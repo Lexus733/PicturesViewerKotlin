@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.example.dmitry.picturesviewerkotlin.presentation.mainactivity.MainApplication
+import com.example.dmitry.picturesviewerkotlin.MainApplication
 import com.example.dmitry.picturesviewerkotlin.data.ReposInternal
 import com.example.dmitry.picturesviewerkotlin.domain.Image
 import com.example.dmitry.picturesviewerkotlin.other.IntentKeys

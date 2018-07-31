@@ -60,8 +60,14 @@ class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.onRefreshView()
+    }
+
     override fun showMessage(id: Int) {
-        Toast.makeText(activity!!.applicationContext, resources.getString(id), Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity!!.applicationContext,
+                resources.getString(id), Toast.LENGTH_SHORT).show()
     }
 
     override fun showDialog(image: Image) {
@@ -79,10 +85,5 @@ class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
                 .setPositiveButton(R.string.dialog_yes) { _, _ -> presenter.onDeleteItem(item) }
                 .setNegativeButton(R.string.dialog_cancel) { arg0, _ -> presenter.onCancelDelete(arg0) }
         return alertDialogBuilder.create()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        presenter.onRefreshView()
     }
 }
