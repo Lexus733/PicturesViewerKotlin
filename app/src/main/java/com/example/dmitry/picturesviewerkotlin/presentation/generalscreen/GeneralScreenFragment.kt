@@ -66,15 +66,15 @@ class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
     }
 
     override fun showMessage(id: Int) {
-        Toast.makeText(activity!!.applicationContext,
+        Toast.makeText(requireNotNull(activity,{"Parameter 'activity' is missing!"}).applicationContext,
                 resources.getString(id), Toast.LENGTH_SHORT).show()
     }
 
     override fun showDialog(image: Image) {
-        deleteDialog?.let { deleteDialog!!.dismiss() }
+        deleteDialog?.let { requireNotNull(deleteDialog,{"Parameter 'deleteDialog' is missing!"}).dismiss() }
 
         deleteDialog = createDeleteDialog(image)
-        deleteDialog!!.show()
+        requireNotNull(deleteDialog,{"Parameter 'deleteDialog' is missing!"}).show()
     }
 
     private fun createDeleteDialog(item: Image): AlertDialog {

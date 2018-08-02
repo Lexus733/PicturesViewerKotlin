@@ -15,11 +15,11 @@ class MainApplication : Application() {
         private var cicerone: Cicerone<Router>? = null
 
         fun getNavigatorHolder(): NavigatorHolder {
-            return cicerone!!.navigatorHolder
+            return requireNotNull(cicerone,{"Parameter 'cicerone' is missing!"}).navigatorHolder
         }
 
         fun getRouter(): Router {
-            return cicerone!!.router
+            return requireNotNull(cicerone,{"Parameter 'cicerone' is missing!"}).router
         }
     }
 

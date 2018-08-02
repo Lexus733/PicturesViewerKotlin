@@ -46,7 +46,7 @@ class GeneralScreenPresenter : MvpPresenter<IGeneralScreen>() {
 
     fun onDeleteItem(item: Image) {
         adapter.removeItem(item)
-        repos.deleteFile(item.path!!)
+        repos.deleteFile(requireNotNull(item.path,{"Parameter 'item.path' is missing!"}))
     }
 
     fun onRefreshView() {
