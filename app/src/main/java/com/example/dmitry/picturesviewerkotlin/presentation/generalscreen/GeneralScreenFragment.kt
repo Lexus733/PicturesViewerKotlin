@@ -83,7 +83,7 @@ class GeneralScreenFragment : MvpAppCompatFragment(), IGeneralScreen {
                 .setMessage(R.string.dialog_message)
                 .setIcon(R.drawable.ic_warning_black_24dp)
                 .setPositiveButton(R.string.dialog_yes) { _, _ -> presenter.onDeleteItem(item) }
-                .setNegativeButton(R.string.dialog_cancel) { arg0, _ -> presenter.onCancelDelete(arg0) }
+                .setNegativeButton(R.string.dialog_cancel) { dialog, _ -> dialog.dismiss() }
         return alertDialogBuilder.create()
     }
 }

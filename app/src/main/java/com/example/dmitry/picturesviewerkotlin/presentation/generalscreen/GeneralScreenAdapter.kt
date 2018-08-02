@@ -51,6 +51,7 @@ class GeneralScreenAdapter(private val listener: OnItemClickListener, private va
 
     fun removeItem(item: Image) {
         images.remove(item)
+        notifyDataSetChanged()
     }
 
     fun sortByDateNewer() {
@@ -62,6 +63,7 @@ class GeneralScreenAdapter(private val listener: OnItemClickListener, private va
             }
             0
         })
+        notifyDataSetChanged()
     }
 
     fun sortByDateOlder() {
@@ -73,6 +75,7 @@ class GeneralScreenAdapter(private val listener: OnItemClickListener, private va
             }
             0
         })
+        notifyDataSetChanged()
     }
 
     fun sortBySizeBigger() {
@@ -84,6 +87,7 @@ class GeneralScreenAdapter(private val listener: OnItemClickListener, private va
             }
             0
         })
+        notifyDataSetChanged()
     }
 
     fun sortBySizeSmaller() {
@@ -95,6 +99,7 @@ class GeneralScreenAdapter(private val listener: OnItemClickListener, private va
             }
             0
         })
+        notifyDataSetChanged()
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

@@ -1,6 +1,5 @@
 package com.example.dmitry.picturesviewerkotlin.presentation.generalscreen
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import com.arellomobile.mvp.InjectViewState
@@ -48,34 +47,25 @@ class GeneralScreenPresenter : MvpPresenter<IGeneralScreen>() {
     fun onDeleteItem(item: Image) {
         adapter.removeItem(item)
         repos.deleteFile(item.path!!)
-        adapter.notifyDataSetChanged()
     }
 
     fun onRefreshView() {
         adapter.setData(repos.getData())
     }
 
-    fun onCancelDelete(arg0: DialogInterface) {
-        arg0.dismiss()
-    }
-
     fun onSortByDateNewer() {
         adapter.sortByDateNewer()
-        adapter.notifyDataSetChanged()
     }
 
     fun onSortByDateOlder() {
         adapter.sortByDateOlder()
-        adapter.notifyDataSetChanged()
     }
 
     fun onSortBySizeBigger() {
         adapter.sortBySizeBigger()
-        adapter.notifyDataSetChanged()
     }
 
     fun onSortBySizeSmaller() {
         adapter.sortBySizeSmaller()
-        adapter.notifyDataSetChanged()
     }
 }
