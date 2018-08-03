@@ -24,8 +24,7 @@ class GeneralScreenAdapter(private val listener: OnItemClickListener, private va
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).
-                inflate(R.layout.picture_item, parent, false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.picture_item, parent, false))
     }
 
     fun setData(images: ArrayList<Image>) {
@@ -33,9 +32,8 @@ class GeneralScreenAdapter(private val listener: OnItemClickListener, private va
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-        return images.size
-    }
+    override fun getItemCount() = images.size
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val image: Image = images[position]

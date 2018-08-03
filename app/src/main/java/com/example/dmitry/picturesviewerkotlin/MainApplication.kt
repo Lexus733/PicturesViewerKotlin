@@ -14,13 +14,10 @@ class MainApplication : Application() {
     companion object {
         private var cicerone: Cicerone<Router>? = null
 
-        fun getNavigatorHolder(): NavigatorHolder {
-            return requireNotNull(cicerone,{"Parameter 'cicerone' is missing!"}).navigatorHolder
-        }
+        fun getNavigatorHolder(): NavigatorHolder =
+                requireNotNull(cicerone, { "Parameter 'cicerone' is missing!" }).navigatorHolder
 
-        fun getRouter(): Router {
-            return requireNotNull(cicerone,{"Parameter 'cicerone' is missing!"}).router
-        }
+        fun getRouter(): Router =
+                requireNotNull(cicerone, { "Parameter 'cicerone' is missing!" }).router
     }
-
 }

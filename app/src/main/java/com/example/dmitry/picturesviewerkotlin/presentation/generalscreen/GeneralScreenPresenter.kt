@@ -22,7 +22,8 @@ class GeneralScreenPresenter : MvpPresenter<IGeneralScreen>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.initView(adapter, View.OnClickListener { v -> v.context.startActivity(repos.createPhoto()) })
+        viewState.initView(adapter, View.OnClickListener
+        { v -> v.context.startActivity(repos.createPhoto()) })
     }
 
     private fun getLongListener(): GeneralScreenAdapter.OnItemLongClickListener {
@@ -46,26 +47,16 @@ class GeneralScreenPresenter : MvpPresenter<IGeneralScreen>() {
 
     fun onDeleteItem(item: Image) {
         adapter.removeItem(item)
-        repos.deleteFile(requireNotNull(item.path,{"Parameter 'item.path' is missing!"}))
+        repos.deleteFile(requireNotNull(item.path, { "Parameter 'item.path' is missing!" }))
     }
 
-    fun onRefreshView() {
-        adapter.setData(repos.getData())
-    }
+    fun onRefreshView() = adapter.setData(repos.getData())
 
-    fun onSortByDateNewer() {
-        adapter.sortByDateNewer()
-    }
+    fun onSortByDateNewer() = adapter.sortByDateNewer()
 
-    fun onSortByDateOlder() {
-        adapter.sortByDateOlder()
-    }
+    fun onSortByDateOlder() = adapter.sortByDateOlder()
 
-    fun onSortBySizeBigger() {
-        adapter.sortBySizeBigger()
-    }
+    fun onSortBySizeBigger() = adapter.sortBySizeBigger()
 
-    fun onSortBySizeSmaller() {
-        adapter.sortBySizeSmaller()
-    }
+    fun onSortBySizeSmaller() = adapter.sortBySizeSmaller()
 }

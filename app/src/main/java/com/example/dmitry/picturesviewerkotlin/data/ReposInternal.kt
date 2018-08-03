@@ -28,14 +28,12 @@ class ReposInternal : IReposInternal {
     override fun getData(): ArrayList<Image> {
         val images = ArrayList<Image>()
         val files = File(
-                Environment.
-                        getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
-                .toString())
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+                        .toString())
                 .listFiles()
         for (file in files) {
             val file = File(
-                    Environment.
-                            getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
                     file.name)
             if (!file.isDirectory && !file.isHidden) {
                 images.add(Image(file.absolutePath))

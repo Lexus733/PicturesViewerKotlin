@@ -38,15 +38,10 @@ class MainActivityPresenter(private val supportFragmentManager: FragmentManager)
         MainApplication.getRouter().navigateTo(ScreenKeys.GENERAL_SCREEN)
     }
 
-    fun onBackPressed() {
-        MainApplication.getRouter().exit()
-    }
+    fun onBackPressed() = MainApplication.getRouter().exit()
 
-    fun onResume() {
-        MainApplication.getNavigatorHolder().setNavigator(navigators)
-    }
+    fun onResume() = MainApplication.getNavigatorHolder().setNavigator(navigators)
 
-    fun onPause() {
-        MainApplication.getNavigatorHolder().removeNavigator()
-    }
+    fun onPause() = MainApplication.getNavigatorHolder().removeNavigator()
+
 }

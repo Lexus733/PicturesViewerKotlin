@@ -11,6 +11,7 @@ import com.example.dmitry.picturesviewerkotlin.R
 class MainActivity : MvpAppCompatActivity(), IMainActivity {
     @InjectPresenter(type = PresenterType.LOCAL)
     lateinit var presenter: MainActivityPresenter
+
     @ProvidePresenter(type = PresenterType.LOCAL)
     fun providedMainActivityPresenter(): MainActivityPresenter {
         return MainActivityPresenter(supportFragmentManager)

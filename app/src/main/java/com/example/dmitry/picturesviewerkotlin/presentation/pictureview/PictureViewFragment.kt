@@ -29,7 +29,9 @@ class PictureViewFragment : MvpAppCompatFragment(), IPictureView {
 
     @ProvidePresenter(type = PresenterType.LOCAL)
     fun providedPictureViewPresenter(): PictureViewPresenter {
-        return PictureViewPresenter(requireNotNull(arguments,{"Parameter 'arguments' is missing!"})[IntentKeys.PATH_TO_PHOTO] as String)
+        return PictureViewPresenter(
+                requireNotNull(arguments, { "Parameter 'arguments' is missing!" }
+                )[IntentKeys.PATH_TO_PHOTO] as String)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
